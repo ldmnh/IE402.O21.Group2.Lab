@@ -479,4 +479,4 @@ const coordinates = [
     [106.17269542182355, 11.07605317492827],
 ]
 
-export { coordinates as QLAH1 }
+export default coordinates

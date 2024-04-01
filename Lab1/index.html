@@ -20,8 +20,9 @@
 
 	<script type="module">
 		import {
-			QLAH1
-		} from "./lines/QL-AH1.js"
+			QLAH1,
+			DT825,
+		} from "./lines/index.js"
 
 		var point_template_tree = {
 			title: "{Name}",
@@ -102,6 +103,17 @@
 					width: 100,
 				},
 				Name: "QL-AH1",
+				Location: "Tỉnh Tây Ninh",
+				popupTemplate: point_template_area,
+			}, {
+				type: "polyline",
+				paths: DT825,
+				symbol: {
+					type: "simple-line",
+					color: [111, 119, 2],
+					width: 100,
+				},
+				Name: "DT.825",
 				Location: "Tỉnh Tây Ninh",
 				popupTemplate: point_template_area,
 			}, ],
@@ -213,7 +225,7 @@
 		};
 		require(["esri/Map", "esri/views/MapView", "esri/Graphic", "esri/layers/GraphicsLayer"], function(Map, MapView, Graphic, GraphicsLayer) {
 			var map = new Map({
-				basemap: "topo-vector",
+				basemap: "dark-gray-vector",
 			});
 			map.on("load", function() {
 				map.graphics.enableMouseEvents();
@@ -222,7 +234,7 @@
 			var view = new MapView({
 				container: "viewDiv",
 				map: map,
-				center: [106.1878029460793, 11.081394945231057],
+				center: [106.34360853206621, 11.277733424390066],
 				zoom: 16,
 				highlightOptions: {
 					color: "blue",
