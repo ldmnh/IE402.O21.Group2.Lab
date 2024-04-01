@@ -1,8 +1,8 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 	<title>ArcGIS JavaScript Tutorials: Create a Starter App</title>
 	<style>
 		html,
@@ -15,32 +15,36 @@
 		}
 	</style>
 
-	<link rel="stylesheet" href="https://js.arcgis.com/4.15/esri/themes/light/main.css">
+	<link rel="stylesheet" href="https://js.arcgis.com/4.15/esri/themes/light/main.css" />
 	<script src="https://js.arcgis.com/4.15/"></script>
 
-	<script>
+	<script type="module">
+		import {
+			QLAH1
+		} from "./lines/QL-AH1.js"
+
 		var point_template_tree = {
 			title: "{Name}",
-			content: "Cây này ở <b>{Location}</b>."
+			content: "Cây này ở <b>{Location}</b>.",
 		};
 		var point_template_light = {
 			title: "{Name}",
-			content: "Bóng đèn này ở <b>{Location}</b>."
+			content: "Bóng đèn này ở <b>{Location}</b>.",
 		};
 		var point_template_chair = {
 			title: "{Name}",
-			content: "Cái ghế này ở <b>{Location}</b>."
+			content: "Cái ghế này ở <b>{Location}</b>.",
 		};
 		var point_template_area = {
 			title: "{Name}",
-			content: "Khu vực này ở <b>{Location}</b>."
+			content: "Khu vực này ở <b>{Location}</b>.",
 		};
 		var point_template_university = {
 			title: "{Name}",
-			content: "Trường ở <b>{Location}</b>."
+			content: "Trường ở <b>{Location}</b>.",
 		};
 		var jsondata = {
-			"points": [{
+			points: [{
 					type: "point",
 					longitude: 106.7986823851482,
 					latitude: 10.876185156455417,
@@ -51,10 +55,10 @@
 						color: [0, 153, 51],
 						outline: {
 							color: [255, 255, 255],
-							width: 1
-						}
+							width: 1,
+						},
 					},
-					popupTemplate: point_template_tree
+					popupTemplate: point_template_tree,
 				},
 				{
 					type: "point",
@@ -67,10 +71,10 @@
 						color: [255, 204, 0],
 						outline: {
 							color: [255, 255, 255],
-							width: 1
-						}
+							width: 1,
+						},
 					},
-					popupTemplate: point_template_light
+					popupTemplate: point_template_light,
 				},
 				{
 					type: "point",
@@ -83,38 +87,25 @@
 						color: [153, 51, 51],
 						outline: {
 							color: [255, 255, 255],
-							width: 1
-						}
+							width: 1,
+						},
 					},
-					popupTemplate: point_template_chair
-				}
+					popupTemplate: point_template_chair,
+				},
 			],
-			"lines": [{
+			lines: [{
 				type: "polyline",
-				paths: [
-					[106.79134386128325, 10.866997521468168],
-					[106.79413335865881, 10.865395978158253],
-					[106.79833906239429, 10.864637349380688],
-					[106.80366056507997, 10.867882581189418],
-					[106.8083812529463, 10.873403608756607],
-					[106.80511968678411, 10.875552988801912],
-					[106.80318849629333, 10.876522311989321],
-					[106.80074232167169, 10.876522311989321],
-					[106.79949777668874, 10.878798101871515],
-					[106.79675119465743, 10.878882390052073],
-					[106.78988473957912, 10.875637277899806],
-					[106.79134386128325, 10.866997521468168]
-				],
+				paths: QLAH1,
 				symbol: {
 					type: "simple-line",
 					color: [226, 119, 40], // orange
-					width: 2
+					width: 100,
 				},
-				Name: "Làng đại học",
-				Location: "Quận Thủ Đức",
-				popupTemplate: point_template_area
-			}],
-			"polygons": [{
+				Name: "QL-AH1",
+				Location: "Tỉnh Tây Ninh",
+				popupTemplate: point_template_area,
+			}, ],
+			polygons: [{
 					type: "polygon",
 					rings: [
 						[106.80514114445627, 10.870158436990936],
@@ -122,7 +113,7 @@
 						[106.8032099539655, 10.868325110065758],
 						[106.80245893544132, 10.869210165849735],
 						[106.80245893544132, 10.869484111155634],
-						[106.8037463957685, 10.871085632526057]
+						[106.8037463957685, 10.871085632526057],
 					],
 					Name: "Đại học CNTT",
 					Location: "Khu phố 6, P.Linh Trung, Q.Thủ Đức, Tp.Hồ Chí Minh",
@@ -131,10 +122,10 @@
 						color: [227, 139, 79, 0.4],
 						outline: {
 							color: [255, 255, 255],
-							width: 1
-						}
+							width: 1,
+						},
 					},
-					popupTemplate: point_template_university
+					popupTemplate: point_template_university,
 				},
 				{
 					type: "polygon",
@@ -158,10 +149,10 @@
 						color: [0, 153, 0, 0.4],
 						outline: {
 							color: [255, 255, 255],
-							width: 1
-						}
+							width: 1,
+						},
 					},
-					popupTemplate: point_template_university
+					popupTemplate: point_template_university,
 				},
 				{
 					type: "polygon",
@@ -176,7 +167,7 @@
 						[106.79763095921437, 10.873045377243164],
 						[106.79773824757497, 10.872497492919857],
 						[106.798103028001, 10.871991752651327],
-						[106.79698722905079, 10.870474526701626]
+						[106.79698722905079, 10.870474526701626],
 					],
 					Name: "Đại học TDTT",
 					Location: "Khu phố 6, P.Linh Trung, Q.Thủ Đức, Tp.Hồ Chí Minh",
@@ -185,10 +176,10 @@
 						color: [204, 153, 0, 0.4],
 						outline: {
 							color: [255, 255, 255],
-							width: 1
-						}
+							width: 1,
+						},
 					},
-					popupTemplate: point_template_university
+					popupTemplate: point_template_university,
 				},
 				{
 					type: "polygon",
@@ -205,7 +196,6 @@
 						[106.79896133488576, 10.87677517838957],
 						[106.79915445393483, 10.876185156455417],
 						[106.79909008091848, 10.875552988801912],
-						[106.79838197773852, 10.874309721840753]
 					],
 					Name: "Đại học KHTN",
 					Location: "Khu phố 6, P.Linh Trung, Q.Thủ Đức, Tp.Hồ Chí Minh",
@@ -214,23 +204,16 @@
 						color: [51, 102, 255, 0.4],
 						outline: {
 							color: [255, 255, 255],
-							width: 1
-						}
+							width: 1,
+						},
 					},
-					popupTemplate: point_template_university
-				}
-
-			]
+					popupTemplate: point_template_university,
+				},
+			],
 		};
-		require([
-			"esri/Map",
-			"esri/views/MapView",
-			"esri/Graphic",
-			"esri/layers/GraphicsLayer"
-		], function(Map, MapView, Graphic, GraphicsLayer) {
-
+		require(["esri/Map", "esri/views/MapView", "esri/Graphic", "esri/layers/GraphicsLayer"], function(Map, MapView, Graphic, GraphicsLayer) {
 			var map = new Map({
-				basemap: "topo-vector"
+				basemap: "topo-vector",
 			});
 			map.on("load", function() {
 				map.graphics.enableMouseEvents();
@@ -239,18 +222,18 @@
 			var view = new MapView({
 				container: "viewDiv",
 				map: map,
-				center: [106.12774151282225, 11.351524111760927],
-				zoom: 15,
+				center: [106.1878029460793, 11.081394945231057],
+				zoom: 16,
 				highlightOptions: {
-					color: "blue"
-				}
+					color: "blue",
+				},
 			});
 			var createGraphic = function(data) {
 				return new Graphic({
 					geometry: data,
 					symbol: data.symbol,
 					attributes: data,
-					popupTemplate: data.popupTemplate
+					popupTemplate: data.popupTemplate,
 				});
 			};
 			var graphicsLayer = new GraphicsLayer();
@@ -265,7 +248,39 @@
 			});
 			map.add(graphicsLayer);
 
+			// get point
 
+			var map;
+			var list_points = [];
+			var string_points = "";
+
+			function copyTextToClipboard(text) {
+				if (!navigator.clipboard) {
+					fallbackCopyTextToClipboard(text);
+					return;
+				}
+				navigator.clipboard.writeText(text).then(
+					function() {
+						console.log("Async: Copying to clipboard was successful!");
+					},
+					function(err) {
+						console.error("Async: Could not copy text: ", err);
+					}
+				);
+			}
+			view.popup.autoOpenEnabled = false; // Disable the default popup behavior
+			view.on("click", function(event) {
+				// Listen for the click event
+				view.hitTest(event).then(function(hitTestResults) {
+					// Search for features where the user clicked
+					if (hitTestResults.results) {
+						list_points.push([event.mapPoint.longitude, event.mapPoint.latitude]);
+						string_points += "[" + event.mapPoint.longitude + ", " + event.mapPoint.latitude + "],";
+						copyTextToClipboard("[" + event.mapPoint.longitude + ", " + event.mapPoint.latitude + "],");
+						// console.log(list_points);
+					}
+				});
+			});
 		});
 	</script>
 </head>
@@ -273,5 +288,6 @@
 <body>
 	<div id="viewDiv"></div>
 </body>
+<script></script>
 
 </html>
