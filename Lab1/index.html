@@ -22,6 +22,7 @@
 		import {
 			QLAH1,
 			DT825,
+			TL787,
 		} from "./lines/index.js"
 
 		var point_template_tree = {
@@ -114,6 +115,17 @@
 					width: 100,
 				},
 				Name: "DT.825",
+				Location: "Tỉnh Tây Ninh",
+				popupTemplate: point_template_area,
+			}, {
+				type: "polyline",
+				paths: TL787,
+				symbol: {
+					type: "simple-line",
+					color: [50, 150, 80],
+					width: 100,
+				},
+				Name: "TL 787",
 				Location: "Tỉnh Tây Ninh",
 				popupTemplate: point_template_area,
 			}, ],
@@ -234,7 +246,7 @@
 			var view = new MapView({
 				container: "viewDiv",
 				map: map,
-				center: [106.34360853206621, 11.277733424390066],
+				center: [106.42619205884453, 11.148066830924597],
 				zoom: 16,
 				highlightOptions: {
 					color: "blue",
