@@ -23,6 +23,7 @@
 			QLAH1,
 			DT825,
 			TL787,
+			QL22B,
 		} from "./lines/index.js"
 
 		var point_template_tree = {
@@ -126,6 +127,17 @@
 					width: 100,
 				},
 				Name: "TL 787",
+				Location: "Tỉnh Tây Ninh",
+				popupTemplate: point_template_area,
+			}, {
+				type: "polyline",
+				paths: QL22B,
+				symbol: {
+					type: "simple-line",
+					color: [180, 40, 40],
+					width: 100,
+				},
+				Name: "QL 22B",
 				Location: "Tỉnh Tây Ninh",
 				popupTemplate: point_template_area,
 			}, ],
@@ -246,7 +258,7 @@
 			var view = new MapView({
 				container: "viewDiv",
 				map: map,
-				center: [106.42619205884453, 11.148066830924597],
+				center: [106.25045943622932, 11.127460636040368],
 				zoom: 16,
 				highlightOptions: {
 					color: "blue",
