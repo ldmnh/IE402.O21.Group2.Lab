@@ -1,7 +1,9 @@
 import { BenCau } from "./BenCau.js";
 import { TrangBang } from "./TrangBang.js";
-import { ChauThanh } from "./ChauThanh.js";
+import { TanBien } from "./TanBien.js";
+import { TanChau } from "./TanChau.js";
 import { HoaThanh } from "./HoaThanh.js";
+import { ChauThanh } from "./ChauThanh.js";
 import { GoDau } from "./GoDau.js";
 import { DuongMinhChau } from "./DuongMinhChau.js";
 var point_template_area = {
@@ -34,6 +36,38 @@ const districts = [
     name: "Huyện Bến Cầu",
     population: 69849,
     area: 264,
+    symbol: {
+      type: "simple-fill",
+      color: [248, 152, 128, 0.4],
+      outline: {
+        color: [255, 255, 255],
+        width: 1,
+      },
+    },
+    popupTemplate: point_template_area,
+  },
+  {
+    type: "polygon",
+    rings: TanBien,
+    name: "Huyện Tân Biên",
+    population: 102.19,
+    area: 861,
+    symbol: {
+      type: "simple-fill",
+      color: [248, 152, 128, 0.4],
+      outline: {
+        color: [255, 255, 255],
+        width: 1,
+      },
+    },
+    popupTemplate: point_template_area,
+  },
+  {
+    type: "polygon",
+    rings: TanChau,
+    name: "Huyện Tân Châu",
+    population: 134.743,
+    area: 1.103,
     symbol: {
       type: "simple-fill",
       color: [248, 152, 128, 0.4],
