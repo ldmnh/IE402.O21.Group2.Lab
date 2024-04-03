@@ -2,6 +2,8 @@ import { BenCau } from "./BenCau.js";
 import { TrangBang } from "./TrangBang.js";
 import { TanBien } from "./TanBien.js";
 import { TanChau } from "./TanChau.js";
+import {HoaThanh} from "./HoaThanh.js"
+import {ChauThanh} from "./ChauThanh.js"
 var point_template_area = {
   title: "{name}",
   content:
@@ -67,6 +69,38 @@ const districts = [
     symbol: {
       type: "simple-fill",
       color: [248, 152, 128, 0.4],
+      outline: {
+        color: [255, 255, 255],
+        width: 1,
+      },
+    },
+    popupTemplate: point_template_area,
+  },
+  {
+    type: "polygon",
+    rings: ChauThanh,
+    name: "Huyện  Châu Thành",
+    population: 140769,
+    area: 580.94,
+    symbol: {
+      type: "simple-fill",
+      color: [66, 135, 245, 0.4],
+      outline: {
+        color: [255, 255, 255],
+        width: 1,
+      },
+    },
+    popupTemplate: point_template_area,
+  },
+  {
+    type: "polygon",
+    rings: HoaThanh,
+    name: "Thị xã  Hòa Thành",
+    population: 152339,
+    area: 82.88,
+    symbol: {
+      type: "simple-fill",
+      color: [32, 247, 100, 0.4],
       outline: {
         color: [255, 255, 255],
         width: 1,
