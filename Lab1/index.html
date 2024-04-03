@@ -19,129 +19,19 @@
 	<script src="https://js.arcgis.com/4.15/"></script>
 
 	<script type="module">
-		import {
-			QLAH1,
-			DT825,
-			TL787,
-			QL22B,
-		} from "./lines/index.js"
+		import schools from "./schools/index.js";
+		import streets from "./streets/index.js"
 
-		var point_template_tree = {
-			title: "{Name}",
-			content: "Cây này ở <b>{Location}</b>.",
-		};
-		var point_template_light = {
-			title: "{Name}",
-			content: "Bóng đèn này ở <b>{Location}</b>.",
-		};
-		var point_template_chair = {
-			title: "{Name}",
-			content: "Cái ghế này ở <b>{Location}</b>.",
-		};
-		var point_template_area = {
-			title: "{Name}",
-			content: "Khu vực này ở <b>{Location}</b>.",
-		};
 		var point_template_university = {
 			title: "{Name}",
-			content: "Trường ở <b>{Location}</b>.",
+			content: "Đoạn đường này ở <b>{Location}</b>.",
 		};
+
 		var jsondata = {
-			points: [{
-					type: "point",
-					longitude: 106.7986823851482,
-					latitude: 10.876185156455417,
-					Name: "Cây xanh 01",
-					Location: "trong khuông viên trường ĐH KHTN",
-					symbol: {
-						type: "simple-marker",
-						color: [0, 153, 51],
-						outline: {
-							color: [255, 255, 255],
-							width: 1,
-						},
-					},
-					popupTemplate: point_template_tree,
-				},
+			points: schools,
+			streets: streets,
+			polygons: [
 				{
-					type: "point",
-					longitude: 106.79597871846113,
-					latitude: 10.872455347930213,
-					Name: "Bóng Đèn 01",
-					Location: "trong khuông viên trường ĐH TDTT",
-					symbol: {
-						type: "simple-marker",
-						color: [255, 204, 0],
-						outline: {
-							color: [255, 255, 255],
-							width: 1,
-						},
-					},
-					popupTemplate: point_template_light,
-				},
-				{
-					type: "point",
-					longitude: 106.80378931111271,
-					latitude: 10.870369163501929,
-					Name: "Ghế ngồi",
-					Location: "trong khuông viên trường ĐH CNTT",
-					symbol: {
-						type: "simple-marker",
-						color: [153, 51, 51],
-						outline: {
-							color: [255, 255, 255],
-							width: 1,
-						},
-					},
-					popupTemplate: point_template_chair,
-				},
-			],
-			lines: [{
-				type: "polyline",
-				paths: QLAH1,
-				symbol: {
-					type: "simple-line",
-					color: [226, 119, 40], // orange
-					width: 100,
-				},
-				Name: "QL-AH1",
-				Location: "Tỉnh Tây Ninh",
-				popupTemplate: point_template_area,
-			}, {
-				type: "polyline",
-				paths: DT825,
-				symbol: {
-					type: "simple-line",
-					color: [111, 119, 2],
-					width: 100,
-				},
-				Name: "DT.825",
-				Location: "Tỉnh Tây Ninh",
-				popupTemplate: point_template_area,
-			}, {
-				type: "polyline",
-				paths: TL787,
-				symbol: {
-					type: "simple-line",
-					color: [50, 150, 80],
-					width: 100,
-				},
-				Name: "TL 787",
-				Location: "Tỉnh Tây Ninh",
-				popupTemplate: point_template_area,
-			}, {
-				type: "polyline",
-				paths: QL22B,
-				symbol: {
-					type: "simple-line",
-					color: [180, 40, 40],
-					width: 100,
-				},
-				Name: "QL 22B",
-				Location: "Tỉnh Tây Ninh",
-				popupTemplate: point_template_area,
-			}, ],
-			polygons: [{
 					type: "polygon",
 					rings: [
 						[106.80514114445627, 10.870158436990936],
@@ -247,24 +137,30 @@
 				},
 			],
 		};
-		require(["esri/Map", "esri/views/MapView", "esri/Graphic", "esri/layers/GraphicsLayer"], function(Map, MapView, Graphic, GraphicsLayer) {
+		require([
+			"esri/Map",
+			"esri/views/MapView",
+			"esri/Graphic",
+			"esri/layers/GraphicsLayer",
+		], function (Map, MapView, Graphic, GraphicsLayer) {
 			var map = new Map({
 				basemap: "dark-gray-vector",
 			});
-			map.on("load", function() {
+			map.on("load", function () {
 				map.graphics.enableMouseEvents();
 			});
 
 			var view = new MapView({
 				container: "viewDiv",
 				map: map,
-				center: [106.25045943622932, 11.127460636040368],
-				zoom: 16,
+				center: [106.0951402558879, 11.29746193688128],
+				zoom: 10,
 				highlightOptions: {
 					color: "blue",
 				},
 			});
-			var createGraphic = function(data) {
+
+			var createGraphic = function (data) {
 				return new Graphic({
 					geometry: data,
 					symbol: data.symbol,
@@ -273,13 +169,13 @@
 				});
 			};
 			var graphicsLayer = new GraphicsLayer();
-			jsondata.points.forEach(function(data) {
+			jsondata.points.forEach(function (data) {
 				graphicsLayer.add(createGraphic(data));
 			});
-			jsondata.lines.forEach(function(data) {
+			jsondata.streets.forEach(function (data) {
 				graphicsLayer.add(createGraphic(data));
 			});
-			jsondata.polygons.forEach(function(data) {
+			jsondata.polygons.forEach(function (data) {
 				graphicsLayer.add(createGraphic(data));
 			});
 			map.add(graphicsLayer);
@@ -296,23 +192,37 @@
 					return;
 				}
 				navigator.clipboard.writeText(text).then(
-					function() {
+					function () {
 						console.log("Async: Copying to clipboard was successful!");
 					},
-					function(err) {
+					function (err) {
 						console.error("Async: Could not copy text: ", err);
 					}
 				);
 			}
-			view.popup.autoOpenEnabled = false; // Disable the default popup behavior
-			view.on("click", function(event) {
+			view.popup.autoOpenEnabled = true; // Disable the default popup behavior
+			view.on("click", function (event) {
 				// Listen for the click event
-				view.hitTest(event).then(function(hitTestResults) {
+				view.hitTest(event).then(function (hitTestResults) {
 					// Search for features where the user clicked
 					if (hitTestResults.results) {
-						list_points.push([event.mapPoint.longitude, event.mapPoint.latitude]);
-						string_points += "[" + event.mapPoint.longitude + ", " + event.mapPoint.latitude + "],";
-						copyTextToClipboard("[" + event.mapPoint.longitude + ", " + event.mapPoint.latitude + "],");
+						list_points.push([
+							event.mapPoint.longitude,
+							event.mapPoint.latitude,
+						]);
+						string_points +=
+							"[" +
+							event.mapPoint.longitude +
+							", " +
+							event.mapPoint.latitude +
+							"],";
+						copyTextToClipboard(
+							"[" +
+							event.mapPoint.longitude +
+							", " +
+							event.mapPoint.latitude +
+							"],"
+						);
 						// console.log(list_points);
 					}
 				});
