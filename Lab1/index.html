@@ -21,6 +21,7 @@
 	<script type="module">
 		import schools from "./schools/index.js";
 		import streets from "./streets/index.js"
+		import districts from "./districts/index.js";
 
 		var point_template_university = {
 			title: "{Name}",
@@ -30,112 +31,7 @@
 		var jsondata = {
 			points: schools,
 			streets: streets,
-			polygons: [
-				{
-					type: "polygon",
-					rings: [
-						[106.80514114445627, 10.870158436990936],
-						[106.80400388783394, 10.868915147546755],
-						[106.8032099539655, 10.868325110065758],
-						[106.80245893544132, 10.869210165849735],
-						[106.80245893544132, 10.869484111155634],
-						[106.8037463957685, 10.871085632526057],
-					],
-					Name: "Đại học CNTT",
-					Location: "Khu phố 6, P.Linh Trung, Q.Thủ Đức, Tp.Hồ Chí Minh",
-					symbol: {
-						type: "simple-fill",
-						color: [227, 139, 79, 0.4],
-						outline: {
-							color: [255, 255, 255],
-							width: 1,
-						},
-					},
-					popupTemplate: point_template_university,
-				},
-				{
-					type: "polygon",
-					rings: [
-						[106.79522769993694, 10.870537744603572],
-						[106.79522769993694, 10.8687044200089],
-						[106.79466980046185, 10.866913229929262],
-						[106.7956139380351, 10.866618209355593],
-						[106.79672973698534, 10.866639282263392],
-						[106.79750221318164, 10.867018594349172],
-						[106.79733055180469, 10.867987945267126],
-						[106.7971374327556, 10.868156527714055],
-						[106.79741638249315, 10.868535837871478],
-						[106.79760950154225, 10.869589474667853],
-						[106.79715889042772, 10.87039023614485],
-					],
-					Name: "Đại học Nông Lâm",
-					Location: "Khu phố 6, P.Linh Trung, Q.Thủ Đức, Tp.Hồ Chí Minh",
-					symbol: {
-						type: "simple-fill",
-						color: [0, 153, 0, 0.4],
-						outline: {
-							color: [255, 255, 255],
-							width: 1,
-						},
-					},
-					popupTemplate: point_template_university,
-				},
-				{
-					type: "polygon",
-					rings: [
-						[106.79479854649456, 10.870664180367287],
-						[106.7936398322001, 10.871528156651996],
-						[106.7935325438395, 10.871991752651327],
-						[106.79394023960977, 10.872834652622513],
-						[106.79469125813395, 10.873424681185172],
-						[106.79580705708419, 10.87348789846195],
-						[106.7960216338054, 10.87317181194409],
-						[106.79763095921437, 10.873045377243164],
-						[106.79773824757497, 10.872497492919857],
-						[106.798103028001, 10.871991752651327],
-						[106.79698722905079, 10.870474526701626],
-					],
-					Name: "Đại học TDTT",
-					Location: "Khu phố 6, P.Linh Trung, Q.Thủ Đức, Tp.Hồ Chí Minh",
-					symbol: {
-						type: "simple-fill",
-						color: [204, 153, 0, 0.4],
-						outline: {
-							color: [255, 255, 255],
-							width: 1,
-						},
-					},
-					popupTemplate: point_template_university,
-				},
-				{
-					type: "polygon",
-					rings: [
-						[106.79705160206711, 10.874646879494943],
-						[106.79707305973923, 10.875426555110405],
-						[106.79687994069013, 10.875721566973882],
-						[106.79700868672286, 10.875953361804736],
-						[106.79668682164106, 10.876269445374627],
-						[106.79619329518232, 10.876311589825294],
-						[106.79600017613323, 10.876627673015491],
-						[106.79602163380535, 10.876964828049044],
-						[106.7971588904277, 10.87744948774189],
-						[106.79896133488576, 10.87677517838957],
-						[106.79915445393483, 10.876185156455417],
-						[106.79909008091848, 10.875552988801912],
-					],
-					Name: "Đại học KHTN",
-					Location: "Khu phố 6, P.Linh Trung, Q.Thủ Đức, Tp.Hồ Chí Minh",
-					symbol: {
-						type: "simple-fill",
-						color: [51, 102, 255, 0.4],
-						outline: {
-							color: [255, 255, 255],
-							width: 1,
-						},
-					},
-					popupTemplate: point_template_university,
-				},
-			],
+			districts: districts,
 		};
 		require([
 			"esri/Map",
@@ -169,13 +65,13 @@
 				});
 			};
 			var graphicsLayer = new GraphicsLayer();
+			jsondata.districts.forEach(function (data) {
+				graphicsLayer.add(createGraphic(data));
+			});
 			jsondata.points.forEach(function (data) {
 				graphicsLayer.add(createGraphic(data));
 			});
 			jsondata.streets.forEach(function (data) {
-				graphicsLayer.add(createGraphic(data));
-			});
-			jsondata.polygons.forEach(function (data) {
 				graphicsLayer.add(createGraphic(data));
 			});
 			map.add(graphicsLayer);
