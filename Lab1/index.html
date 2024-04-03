@@ -1,135 +1,127 @@
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>ArcGIS JavaScript Tutorials: Create a Starter App</title>
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
 
-<head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
-	<title>ArcGIS JavaScript Tutorials: Create a Starter App</title>
-	<style>
-		html,
-		body,
-		#viewDiv {
-			padding: 0;
-			margin: 0;
-			height: 100%;
-			width: 100%;
-		}
-	</style>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.15/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.15/"></script>
 
-	<link rel="stylesheet" href="https://js.arcgis.com/4.15/esri/themes/light/main.css" />
-	<script src="https://js.arcgis.com/4.15/"></script>
+    <script type="module">
+      import schools from "./schools/index.js";
+      import streets from "./streets/index.js";
+      import districts from "./districts/index.js";
 
-	<script type="module">
-		import schools from "./schools/index.js";
-		import streets from "./streets/index.js"
-		import districts from "./districts/index.js";
+      var point_template_university = {
+        title: "{Name}",
+        content: "Đoạn đường này ở <b>{Location}</b>.",
+      };
 
-		var point_template_university = {
-			title: "{Name}",
-			content: "Đoạn đường này ở <b>{Location}</b>.",
-		};
+      var jsondata = {
+        points: schools,
+        streets: streets,
+        districts: districts,
+      };
+      require(["esri/Map", "esri/views/MapView", "esri/Graphic", "esri/layers/GraphicsLayer"], function (Map, MapView, Graphic, GraphicsLayer) {
+        var map = new Map({
+          basemap: "topo-vector",
+        });
+        map.on("load", function () {
+          map.graphics.enableMouseEvents();
+        });
 
-		var jsondata = {
-			points: schools,
-			streets: streets,
-			districts: districts,
-		};
-		require([
-			"esri/Map",
-			"esri/views/MapView",
-			"esri/Graphic",
-			"esri/layers/GraphicsLayer",
-		], function (Map, MapView, Graphic, GraphicsLayer) {
-			var map = new Map({
-				basemap: "dark-gray-vector",
-			});
-			map.on("load", function () {
-				map.graphics.enableMouseEvents();
-			});
+        var view = new MapView({
+          container: "viewDiv",
+          map: map,
+          center: [106.0951402558879, 11.29746193688128],
+          zoom: 10,
+          highlightOptions: {
+            color: "blue",
+          },
+        });
 
-			var view = new MapView({
-				container: "viewDiv",
-				map: map,
-				center: [106.0951402558879, 11.29746193688128],
-				zoom: 10,
-				highlightOptions: {
-					color: "blue",
-				},
-			});
+        var createGraphic = function (data) {
+          return new Graphic({
+            geometry: data,
+            symbol: data.symbol,
+            attributes: data,
+            popupTemplate: data.popupTemplate,
+          });
+        };
+        var graphicsLayer = new GraphicsLayer();
+        jsondata.districts.forEach(function (data) {
+          graphicsLayer.add(createGraphic(data));
+        });
+        // jsondata.points.forEach(function (data) {
+        //   graphicsLayer.add(createGraphic(data));
+        // });
+        jsondata.streets.forEach(function (data) {
+          graphicsLayer.add(createGraphic(data));
+        });
+        map.add(graphicsLayer);
 
-			var createGraphic = function (data) {
-				return new Graphic({
-					geometry: data,
-					symbol: data.symbol,
-					attributes: data,
-					popupTemplate: data.popupTemplate,
-				});
-			};
-			var graphicsLayer = new GraphicsLayer();
-			jsondata.districts.forEach(function (data) {
-				graphicsLayer.add(createGraphic(data));
-			});
-			jsondata.points.forEach(function (data) {
-				graphicsLayer.add(createGraphic(data));
-			});
-			jsondata.streets.forEach(function (data) {
-				graphicsLayer.add(createGraphic(data));
-			});
-			map.add(graphicsLayer);
+        //School Layer
+        var pointsLayer = new GraphicsLayer();
+        jsondata.points.forEach(function (data) {
+          pointsLayer.add(createGraphic(data));
+        });
+        map.add(pointsLayer);
+        pointsLayer.visible = false;
+        var minZoomToShowPoints = 12;
+        view.watch("zoom", function (newValue, oldValue, propertyName, target) {
+          if (newValue >= minZoomToShowPoints) {
+            pointsLayer.visible = true;
+          } else if (newValue < minZoomToShowPoints) {
+            pointsLayer.visible = false;
+          }
+        });
 
-			// get point
+        // get point
+        var map;
+        var list_points = [];
+        var string_points = "";
 
-			var map;
-			var list_points = [];
-			var string_points = "";
+        function copyTextToClipboard(text) {
+          if (!navigator.clipboard) {
+            fallbackCopyTextToClipboard(text);
+            return;
+          }
+          navigator.clipboard.writeText(text).then(
+            function () {
+              console.log("Async: Copying to clipboard was successful!");
+            },
+            function (err) {
+              console.error("Async: Could not copy text: ", err);
+            }
+          );
+        }
+        view.popup.autoOpenEnabled = true; // Disable the default popup behavior
+        view.on("click", function (event) {
+          view.hitTest(event).then(function (hitTestResults) {
+            if (hitTestResults.results) {
+              list_points.push([event.mapPoint.longitude, event.mapPoint.latitude]);
+              string_points += "[" + event.mapPoint.longitude + ", " + event.mapPoint.latitude + "],";
+              copyTextToClipboard("[" + event.mapPoint.longitude + ", " + event.mapPoint.latitude + "],");
+              // console.log(list_points);
+            }
+          });
+        });
+      });
+    </script>
+  </head>
 
-			function copyTextToClipboard(text) {
-				if (!navigator.clipboard) {
-					fallbackCopyTextToClipboard(text);
-					return;
-				}
-				navigator.clipboard.writeText(text).then(
-					function () {
-						console.log("Async: Copying to clipboard was successful!");
-					},
-					function (err) {
-						console.error("Async: Could not copy text: ", err);
-					}
-				);
-			}
-			view.popup.autoOpenEnabled = true; // Disable the default popup behavior
-			view.on("click", function (event) {
-				// Listen for the click event
-				view.hitTest(event).then(function (hitTestResults) {
-					// Search for features where the user clicked
-					if (hitTestResults.results) {
-						list_points.push([
-							event.mapPoint.longitude,
-							event.mapPoint.latitude,
-						]);
-						string_points +=
-							"[" +
-							event.mapPoint.longitude +
-							", " +
-							event.mapPoint.latitude +
-							"],";
-						copyTextToClipboard(
-							"[" +
-							event.mapPoint.longitude +
-							", " +
-							event.mapPoint.latitude +
-							"],"
-						);
-						// console.log(list_points);
-					}
-				});
-			});
-		});
-	</script>
-</head>
-
-<body>
-	<div id="viewDiv"></div>
-</body>
-<script></script>
-
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+  <script></script>
 </html>
