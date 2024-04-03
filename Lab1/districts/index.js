@@ -84,7 +84,7 @@ const districts = [
     area: 260,
     symbol: {
       type: "simple-fill",
-      color: [32, 247, 50, 0.4],
+      color: [0, 255, 255, 0.4],
       outline: {
         color: [255, 255, 255],
         width: 1,
@@ -100,7 +100,7 @@ const districts = [
     area: 435.6,
     symbol: {
       type: "simple-fill",
-      color: [32, 200, 70, 0.4],
+      color: [26, 100, 30, 0.4],
       outline: {
         color: [255, 255, 255],
         width: 1,
