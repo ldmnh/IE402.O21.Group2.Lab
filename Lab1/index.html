@@ -21,7 +21,9 @@
       import schools from "./schools/index.js";
       import streets from "./streets/index.js";
       import districts from "./districts/index.js";
-
+      import city from "./city/index.js";
+      import town from "./town/index.js";
+      
       var point_template_university = {
         title: "{Name}",
         content: "Đoạn đường này ở <b>{Location}</b>.",
@@ -30,6 +32,8 @@
         points: schools,
         streets: streets,
         districts: districts,
+        city: city,
+        town: town,
       };
       require(["esri/Map", "esri/views/MapView", "esri/Graphic", "esri/layers/GraphicsLayer"], function (Map, MapView, Graphic, GraphicsLayer) {
         var map = new Map({
@@ -71,6 +75,12 @@
         //School Layer
         var pointsLayer = new GraphicsLayer();
         jsondata.points.forEach(function (data) {
+          pointsLayer.add(createGraphic(data));
+        });
+        jsondata.city.forEach(function (data) {
+          pointsLayer.add(createGraphic(data));
+        });
+        jsondata.town.forEach(function (data) {
           pointsLayer.add(createGraphic(data));
         });
         map.add(pointsLayer);
