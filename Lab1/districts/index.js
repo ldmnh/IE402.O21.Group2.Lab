@@ -6,11 +6,10 @@ import { HoaThanh } from "./HoaThanh.js";
 import { ChauThanh } from "./ChauThanh.js";
 import { GoDau } from "./GoDau.js";
 import { DuongMinhChau } from "./DuongMinhChau.js";
+import { TayNinh } from "./TayNinh.js";
 var point_template_area = {
   title: "{name}",
-  content:
-    "Diện tích: <b>{area} km<sup>2</sup></b>.<br>" +
-    "Dân số: <b>{population} người</b>.",
+  content: "Diện tích: <b>{area} km<sup>2</sup></b>.<br>" + "Dân số: <b>{population} người</b>.",
 };
 
 const districts = [
@@ -54,7 +53,7 @@ const districts = [
     area: 861,
     symbol: {
       type: "simple-fill",
-      color: [248, 152, 128, 0.4],
+      color: [235, 232, 52, 0.4],
       outline: {
         color: [255, 255, 255],
         width: 1,
@@ -70,7 +69,7 @@ const districts = [
     area: 1.103,
     symbol: {
       type: "simple-fill",
-      color: [248, 152, 128, 0.4],
+      color: [235, 64, 52, 0.4],
       outline: {
         color: [255, 255, 255],
         width: 1,
@@ -135,6 +134,22 @@ const districts = [
     symbol: {
       type: "simple-fill",
       color: [26, 100, 30, 0.4],
+      outline: {
+        color: [255, 255, 255],
+        width: 1,
+      },
+    },
+    popupTemplate: point_template_area,
+  },
+  {
+    type: "polygon",
+    rings: TayNinh,
+    name: "Thành phố Tây Ninh",
+    population: 135254,
+    area: 139.92,
+    symbol: {
+      type: "simple-fill",
+      color: [235, 52, 229, 0.4],
       outline: {
         color: [255, 255, 255],
         width: 1,
