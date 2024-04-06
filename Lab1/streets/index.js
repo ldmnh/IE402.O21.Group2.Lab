@@ -5,7 +5,7 @@ import QL22B from "./QL22B.js";
 import DT821 from "./DT821_DT825_QL22.js";
 import DT2 from "./DT.2.js";
 import DT792 from "./DT.792.js";
-
+import DT782 from "./DT782.js";
 var point_template_line = {
   title: "{Name}",
   content: "Đường <b>{Name} - {Location}</b>.",
@@ -93,6 +93,18 @@ const streets = [
       width: 2,
     },
     Name: "DT792",
+    Location: "Tỉnh Tây Ninh",
+    popupTemplate: point_template_line,
+  },
+  {
+    type: "polyline",
+    paths: DT782,
+    symbol: {
+      type: "simple-line",
+      color: [253, 232, 49],
+      width: 2,
+    },
+    Name: "DT 782",
     Location: "Tỉnh Tây Ninh",
     popupTemplate: point_template_line,
   },

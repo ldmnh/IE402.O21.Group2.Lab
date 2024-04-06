@@ -114,7 +114,7 @@
           }
         );
       }
-      view.popup.autoOpenEnabled = false; // Disable the default popup behavior
+      view.popup.autoOpenEnabled = true; // Disable the default popup behavior
       view.on("click", function (event) {
         view.hitTest(event).then(function (hitTestResults) {
           if (hitTestResults.results) {
