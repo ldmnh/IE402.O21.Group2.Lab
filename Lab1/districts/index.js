@@ -9,7 +9,9 @@ import { DuongMinhChau } from "./DuongMinhChau.js";
 import { TayNinh } from "./TayNinh.js";
 var point_template_area = {
   title: "{name}",
-  content: "Diện tích: <b>{area} km<sup>2</sup></b>.<br>" + "Dân số: <b>{population} người</b>.",
+  content:
+    "Diện tích: <b>{area} km<sup>2</sup></b>.<br>" +
+    "Dân số: <b>{population} người</b>.",
 };
 
 const districts = [

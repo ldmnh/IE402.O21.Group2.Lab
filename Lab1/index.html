@@ -19,41 +19,36 @@
   <script src="https://js.arcgis.com/4.15/"></script>
 
   <script type="module">
+    // import
     import schools from "./schools/index.js";
     import streets from "./streets/index.js";
     import districts from "./districts/index.js";
-    import city from "./city/index.js";
-    import town from "./town/index.js";
+    import cities from "./cities/index.js";
+    import towns from "./towns/index.js";
 
-    var point_template_university = {
-      title: "{Name}",
-      content: "Đoạn đường này ở <b>{Location}</b>.",
-    };
-    var jsondata = {
-      points: schools,
-      streets: streets,
-      districts: districts,
-      city: city,
-      town: town,
-    };
     require(["esri/Map", "esri/views/MapView", "esri/Graphic", "esri/layers/GraphicsLayer"], function (Map, MapView, Graphic, GraphicsLayer) {
+      // create map
       var map = new Map({
         basemap: "topo-vector",
       });
+
+      // enable mouse event on map
       map.on("load", function () {
         map.graphics.enableMouseEvents();
       });
 
+      // create view
       var view = new MapView({
         container: "viewDiv",
         map: map,
-        center: [106.45053879235326, 11.663457356888838],
+        center: [106.12218230229296, 11.368515844547606],
         zoom: 10,
         highlightOptions: {
-          color: "blue",
+          color: "rgb(123, 211, 234)",
         },
       });
 
+      // create graphic
       var createGraphic = function (data) {
         return new Graphic({
           geometry: data,
@@ -62,29 +57,43 @@
           popupTemplate: data.popupTemplate,
         });
       };
+
+      // create graphics layer
       var graphicsLayer = new GraphicsLayer();
-      jsondata.districts.forEach(function (data) {
+
+      // add districts
+      districts.forEach(function (data) {
         graphicsLayer.add(createGraphic(data));
       });
-      // jsondata.points.forEach(function (data) {
-      // 	graphicsLayer.add(createGraphic(data));
-      // });
-      jsondata.streets.forEach(function (data) {
+
+      // add streets
+      streets.forEach(function (data) {
         graphicsLayer.add(createGraphic(data));
       });
+
       map.add(graphicsLayer);
-      //School Layer
+
+      // create points layer
       var pointsLayer = new GraphicsLayer();
-      jsondata.points.forEach(function (data) {
+
+      // add schools
+      schools.forEach(function (data) {
         pointsLayer.add(createGraphic(data));
       });
-      jsondata.city.forEach(function (data) {
+
+      // add cities
+      cities.forEach(function (data) {
         pointsLayer.add(createGraphic(data));
       });
-      jsondata.town.forEach(function (data) {
+
+      // add towns
+      towns.forEach(function (data) {
         pointsLayer.add(createGraphic(data));
       });
+
       map.add(pointsLayer);
+
+      // hide pont layer when zoom out
       pointsLayer.visible = false;
       var minZoomToShowPoints = 11;
       view.watch("zoom", function (newValue, oldValue, propertyName, target) {
@@ -94,8 +103,8 @@
           pointsLayer.visible = false;
         }
       });
-      // get point
 
+      // get point
       var map;
       var list_points = [];
       var string_points = "";
@@ -114,6 +123,7 @@
           }
         );
       }
+
       view.popup.autoOpenEnabled = true; // Disable the default popup behavior
       view.on("click", function (event) {
         view.hitTest(event).then(function (hitTestResults) {
@@ -121,7 +131,6 @@
             list_points.push([event.mapPoint.longitude, event.mapPoint.latitude]);
             string_points += "[" + event.mapPoint.longitude + ", " + event.mapPoint.latitude + "],";
             copyTextToClipboard("[" + event.mapPoint.longitude + ", " + event.mapPoint.latitude + "],");
-            // console.log(list_points);
           }
         });
       });
