@@ -512,5 +512,20 @@ require([
     },
   });
 
+  view.on("click", function (event) {
+    view.hitTest(event).then(function (hitTestResults) {
+      if (hitTestResults.results) {
+        list_points.push([event.mapPoint.longitude, event.mapPoint.latitude]);
+        string_points +=
+          "[" +
+          event.mapPoint.longitude +
+          ", " +
+          event.mapPoint.latitude +
+          "],";
+        copyTextToClipboard(string_points);
+      }
+    });
+  });
+
   view.popup.defaultPopupTemplateEnabled = true;
 });
