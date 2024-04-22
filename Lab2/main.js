@@ -63,6 +63,34 @@ require([
     field: "Công dụng",
     uniqueValueInfos: [
       {
+        value: "Red",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [
+            {
+              type: "extrude",
+              material: {
+                color: "#FF0000",
+              },
+            },
+          ],
+        },
+      },
+      {
+        value: "Yellow",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [
+            {
+              type: "extrude",
+              material: {
+                color: "#ffff00",
+              },
+            },
+          ],
+        },
+      },
+      {
         value: "Office",
         symbol: {
           type: "polygon-3d",
