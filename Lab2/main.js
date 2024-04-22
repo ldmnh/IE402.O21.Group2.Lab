@@ -472,7 +472,7 @@ require([
     visualVariables: [heightVV],
   };
 
-  const map = new Map({
+  var map = new Map({
     basemap: "gray-vector",
     ground: "world-elevation",
     layers: [
@@ -526,6 +526,9 @@ require([
       }
     });
   });
+  var map;
+  var list_points = [];
+  var string_points = "";
 
   view.popup.defaultPopupTemplateEnabled = true;
 });
