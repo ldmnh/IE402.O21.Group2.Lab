@@ -15,6 +15,7 @@ require([
   Graphic,
   esriRequest
 ) {
+  // create graphic
   var createGraphic = function (data) {
     return new Graphic({
       geometry: data,
@@ -30,7 +31,8 @@ require([
     },
     responseType: "json",
   };
-  // request json
+
+  // request line.json
   esriRequest("./line.json", json_options).then(function (response) {
     var graphicsLayer = new GraphicsLayer();
     console.log(response);
@@ -40,6 +42,7 @@ require([
     map.add(graphicsLayer);
   });
 
+  // create geo json layer
   const geojsonLayer = new GeoJSONLayer({
     url: "./extrudepolygon.geojson",
   });
@@ -58,12 +61,13 @@ require([
     valueUnit: "meters",
   };
 
+  // render
   geojsonLayer.renderer = {
     type: "unique-value",
-    field: "Công dụng",
+    field: "color",
     uniqueValueInfos: [
       {
-        value: "Red",
+        value: "red1",
         symbol: {
           type: "polygon-3d",
           symbolLayers: [
@@ -77,91 +81,49 @@ require([
         },
       },
       {
-        value: "Yellow",
+        value: "blue1",
         symbol: {
           type: "polygon-3d",
           symbolLayers: [
             {
               type: "extrude",
               material: {
-                color: "#ffff00",
+                color: "#135EC5",
               },
             },
           ],
         },
       },
       {
-        value: "Office",
+        value: "blue2",
         symbol: {
           type: "polygon-3d",
           symbolLayers: [
             {
               type: "extrude",
               material: {
-                color: "#1961B4",
+                color: "#17569F",
               },
             },
           ],
         },
       },
       {
-        value: "Retail",
+        value: "blue3",
         symbol: {
           type: "polygon-3d",
           symbolLayers: [
             {
               type: "extrude",
               material: {
-                color: "#FFFFFF",
+                color: "#69AEB2",
               },
             },
           ],
         },
       },
       {
-        value: "Roof",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#99A7AD",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "Nền",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#B4C3CD",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "Tường",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#FFE290",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "Tường25White",
+        value: "white1",
         symbol: {
           type: "polygon-3d",
           symbolLayers: [
@@ -175,35 +137,35 @@ require([
         },
       },
       {
-        value: "Tường30White",
+        value: "gray1",
         symbol: {
           type: "polygon-3d",
           symbolLayers: [
             {
               type: "extrude",
               material: {
-                color: "#FFFFFF",
+                color: "#F9EDF2",
               },
             },
           ],
         },
       },
       {
-        value: "Tường27White",
+        value: "gray2",
         symbol: {
           type: "polygon-3d",
           symbolLayers: [
             {
               type: "extrude",
               material: {
-                color: "#FFFFFF",
+                color: "#B4B4B8",
               },
             },
           ],
         },
       },
       {
-        value: "Tường3",
+        value: "gray3",
         symbol: {
           type: "polygon-3d",
           symbolLayers: [
@@ -217,273 +179,7 @@ require([
         },
       },
       {
-        value: "Green",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#569219",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "WhiteGlass",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#FFFFFF",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "RoofWhiteGlass",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#FFFFFF",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "RoofBlueGlass",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#1961B4",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "Flat1",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#717B81",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "Flat2",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#717B81",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "Maindoor",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#17569F",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "Pillar",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#FFFFFF",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "RoofPillar",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#FFFFFF",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "BoxOnRoof",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#68B596",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "HighestRoof",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#FFFFFF",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "LeftDoor",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#17569F",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "LongWindow",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#17569F",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "LongWindow2",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#17569F",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "BlueGlass1-6",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#17569F",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "YellowGlass1",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#CEB774",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "YellowGlass2",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#CEB774",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "YellowGlass3",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#CEB774",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "YellowGlass4",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "#CEB774",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "Door",
+        value: "gray4",
         symbol: {
           type: "polygon-3d",
           symbolLayers: [
@@ -497,42 +193,42 @@ require([
         },
       },
       {
-        value: "Nền của các tầng",
+        value: "yellow1",
         symbol: {
           type: "polygon-3d",
           symbolLayers: [
             {
               type: "extrude",
               material: {
-                color: "white",
+                color: "#FFC37C",
               },
             },
           ],
         },
       },
       {
-        value: "Viền dọc",
+        value: "green1",
         symbol: {
           type: "polygon-3d",
           symbolLayers: [
             {
               type: "extrude",
               material: {
-                color: "white",
+                color: "#569219",
               },
             },
           ],
         },
       },
       {
-        value: "Viền cửa sổ",
+        value: "green2",
         symbol: {
           type: "polygon-3d",
           symbolLayers: [
             {
               type: "extrude",
               material: {
-                color: "white",
+                color: "#68B596",
               },
             },
           ],
@@ -542,6 +238,7 @@ require([
     visualVariables: [heightVV],
   };
 
+  // create map
   var map = new Map({
     basemap: "gray-vector",
     ground: "world-elevation",
@@ -572,6 +269,7 @@ require([
     ],
   });
 
+  // create view
   const view = new SceneView({
     container: "viewDiv",
     map: map,
@@ -582,6 +280,7 @@ require([
     },
   });
 
+  // get longitude, latitude
   view.on("click", function (event) {
     view.hitTest(event).then(function (hitTestResults) {
       if (hitTestResults.results) {
@@ -596,6 +295,7 @@ require([
       }
     });
   });
+
   var map;
   var list_points = [];
   var string_points = "";
