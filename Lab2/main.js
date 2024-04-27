@@ -496,6 +496,48 @@ require([
           ],
         },
       },
+      {
+        value: "Nền của các tầng",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [
+            {
+              type: "extrude",
+              material: {
+                color: "white",
+              },
+            },
+          ],
+        },
+      },
+      {
+        value: "Viền dọc",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [
+            {
+              type: "extrude",
+              material: {
+                color: "white",
+              },
+            },
+          ],
+        },
+      },
+      {
+        value: "Viền cửa sổ",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [
+            {
+              type: "extrude",
+              material: {
+                color: "white",
+              },
+            },
+          ],
+        },
+      },
     ],
     visualVariables: [heightVV],
   };
