@@ -538,6 +538,34 @@ require([
           ],
         },
       },
+      {
+        value: "Cửa ra vào",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [
+            {
+              type: "extrude",
+              material: {
+                color: "gray",
+              },
+            },
+          ],
+        },
+      },
+      {
+        value: "Tòa nhà",
+        symbol: {
+          type: "polygon-3d",
+          symbolLayers: [
+            {
+              type: "extrude",
+              material: {
+                color: "white",
+              },
+            },
+          ],
+        },
+      },
     ],
     visualVariables: [heightVV],
   };
