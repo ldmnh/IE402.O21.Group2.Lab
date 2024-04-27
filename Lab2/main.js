@@ -44,7 +44,7 @@ require([
 
   // create geo json layer
   const geojsonLayer = new GeoJSONLayer({
-    url: "./extrudepolygon.geojson",
+    url: "./extrude-polygon.geojson",
   });
 
   geojsonLayer.elevationInfo = {
@@ -214,7 +214,7 @@ require([
             {
               type: "extrude",
               material: {
-                color: "#569219",
+                color: "#41B06E",
               },
             },
           ],
@@ -229,34 +229,6 @@ require([
               type: "extrude",
               material: {
                 color: "#68B596",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "Cửa ra vào",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "gray",
-              },
-            },
-          ],
-        },
-      },
-      {
-        value: "Tòa nhà",
-        symbol: {
-          type: "polygon-3d",
-          symbolLayers: [
-            {
-              type: "extrude",
-              material: {
-                color: "white",
               },
             },
           ],
